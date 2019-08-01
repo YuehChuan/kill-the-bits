@@ -20,6 +20,53 @@ def load_data(data_path='', batch_size=128, nb_workers=64):
         - batch_size: train and test batch size
         - nb_workers: number of workers for dataloader
     """
+    normalize = transforms.Normalize((0.4914, 0.4822, 0.4465),
+                             (0.2023, 0.1994, 0.2010))
+    transform_train = transforms.Compose([
+        transforms.RandomCrop(32, padding=4),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        normalize
+    ])
+
+    transform_test = transforms.Compose([
+        transforms.ToTensor(),
+        normalize
+    ])
+    
+    trainset = CIFAR10(root=data_path,
+                        train=True,
+                        download=False,
+                        transform=transform_train)
+
+    testset = CIFAR10(root=data_path,
+                       train=False,
+                       download=False,
+                       transform=transform_test)
+
+
+    train_loader = DataLoader(trainset,
+                             batch_size=batch_size,
+                             shuffle=True,
+                             num_workers=0)
+
+    test_loader = DataLoader(testset,
+                            batch_size=batch_size,
+                            shuffle=False,
+                            num_workers=0)
+
+    """
+
+
+    trainset = CIFAR100(root=data_path,
+                        train=True,
+                        download=False,
+                        transform=transform_train)
+
+    testset = CIFAR100(root=data_path,
+                       train=False,
+                       download=False,
+                       transform=transform_test)
 
     # data path
     train_data_path = os.path.join(data_path, 'train')
@@ -49,5 +96,4 @@ def load_data(data_path='', batch_size=128, nb_workers=64):
             root=test_data_path, transform=transf_test)
     test_loader = torch.utils.data.DataLoader(
             test_set, batch_size=batch_size, shuffle=False, num_workers=nb_workers, pin_memory=True)
-
-    return train_loader, test_loader
+    """
