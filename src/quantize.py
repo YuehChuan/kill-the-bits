@@ -102,8 +102,13 @@ def main():
     args = parser.parse_args()
     args.block = '' if args.block == 'all' else args.block
 
+    student = models.__dict__['resnet18']()
+
+    student.load_state_dict(torch.load('../resnet18-cifar10.pth'))
+    student = student.cuda()
+
     # student model to quantize
-    student = models.__dict__[args.model](pretrained=True).cuda()
+    # student = models.__dict__[args.model](pretrained=True).cuda()
     student.eval()
     criterion = nn.CrossEntropyLoss().cuda()
     cudnn.benchmark = True
