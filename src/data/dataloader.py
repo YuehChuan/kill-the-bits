@@ -97,3 +97,4 @@ def load_data(data_path='', batch_size=128, nb_workers=64):
     test_loader = torch.utils.data.DataLoader(
             test_set, batch_size=batch_size, shuffle=False, num_workers=nb_workers, pin_memory=True)
     """
+    return train_loader, test_loader
