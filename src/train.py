@@ -95,6 +95,6 @@ torch.save(model, 'pds.pth')
 plt.plot(train_losses, label='Training loss')
 plt.plot(test_losses, label='Validation loss')
 plt.legend(frameon=False)
-plt.savefig("filename.png")
+plt.savefig("TrainValidation.png")
 plt.show()
 

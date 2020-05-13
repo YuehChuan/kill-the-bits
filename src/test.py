@@ -59,6 +59,7 @@ to_pil = transforms.ToPILImage()
 images, labels, classes = get_random_images(50)
 
 rows =10
+success =0
 #columns = len(images)/rows
 fig=plt.figure(figsize=(10,10))
 for ii in range(len(images)):
@@ -71,4 +72,9 @@ for ii in range(len(images)):
     sub.set_title(str(classes[index]) + ":" + str(res))
     plt.axis('off')
     plt.imshow(image)
+    if (res==True):
+        success+=1
+plt.text(500,500,"accuracy :" + str(success*2) + "%")
 plt.show()
+
+
