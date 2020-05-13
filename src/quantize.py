@@ -102,9 +102,11 @@ def main():
     args = parser.parse_args()
     args.block = '' if args.block == 'all' else args.block
 
-    student = models.__dict__['resnet18']()
+#    student = models.__dict__['resnet18']()
+    student = models.__dict__['resnet50']()
 
-    student.load_state_dict(torch.load('../resnet18-cifar10.pth'))
+#    student.load_state_dict(torch.load('../resnet18-cifar10.pth'))
+    student.load_state_dict(torch.load('../pds.pth'))
     student = student.cuda()
 
     # student model to quantize

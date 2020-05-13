@@ -16,7 +16,7 @@ import torch.backends.cudnn as cudnn
 import torch.optim as optim
 
 import models
-from data import load_data
+from data.dataloader import load_data
 from optim import CentroidSGD
 from quantization import PQ
 from utils.training import finetune_centroids, evaluate
@@ -25,7 +25,7 @@ from utils.dynamic_sampling import dynamic_sampling
 from utils.statistics import compute_size
 from utils.utils import centroids_from_weights, weight_from_centroids
 
-data_path = '../cifar10/'
+data_path = '/home/corleone/resnet-torch/kill-the-bits/sample'
 # data_path = '/home/lujianghu/kill-the-bits/src/'
 
 batch_size = 128
@@ -35,7 +35,7 @@ num_epoch = 100
 LR = 0.0001
 momentum = 0.9
 weight_decay = 5e-4
-dataset_name = 'cifar10'
+dataset_name = 'sample'
 model_name = 'ResNet18'
 
 if __name__ == '__main__':
@@ -86,5 +86,5 @@ if __name__ == '__main__':
             print('Acc: %.3f%%' % (100 * correct / total))
             
             print('Saving model......')
-    fname = '../resnet18-cifar10.pth'
+    fname = '../resnet18-sample.pth'
     torch.save(net.state_dict(), fname)

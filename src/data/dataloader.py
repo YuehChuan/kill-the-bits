@@ -34,12 +34,12 @@ def load_data(data_path='', batch_size=128, nb_workers=64):
         normalize
     ])
     
-    trainset = CIFAR10(root=data_path,
+    trainset = sample(root=data_path,
                         train=True,
                         download=False,
                         transform=transform_train)
 
-    testset = CIFAR10(root=data_path,
+    testset = sample(root=data_path,
                        train=False,
                        download=False,
                        transform=transform_test)
