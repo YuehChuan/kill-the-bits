@@ -9,18 +9,9 @@ from PIL import Image
 from torch.autograd import Variable
 
 #https://github.com/cfotache/pytorch_imageclassifier/blob/master/PyTorch_Image_Training.ipynb
-data_dir = '/home/corleone/resnet-torch/kill-the-bits/src/val'#
-#data_dir = '/home/corleone/resnet-torch/kill-the-bits/src/val/test-corona'#0 corona
-#data_dir = '/home/corleone/resnet-torch/kill-the-bits/sample/val/external/'#1 external
-#data_dir = '/home/corleone/resnet-torch/kill-the-bits/sample/val/internal/'#2 internal
-#data_dir = '/home/corleone/resnet-torch/kill-the-bits/sample/val/noise/'#3 noise
-
+data_dir = '/home/corleone/resnet-torch/kill-the-bits/sample/val'#
 # sudo apt-get install python3-tk
 
-"""
-noise
-"""
-#data_dir = '/home/corleone/resnet-torch/kill-the-bits/src/7793'# noise
 
 
 
@@ -65,13 +56,17 @@ def get_random_images(num):
     return images, labels,classes
 
 to_pil = transforms.ToPILImage()
-images, labels, classes = get_random_images(5)
+images, labels, classes = get_random_images(50)
+
+rows =10
+#columns = len(images)/rows
 fig=plt.figure(figsize=(10,10))
 for ii in range(len(images)):
     image = to_pil(images[ii])
     index = predict_image(image)
     print(index)
-    sub = fig.add_subplot(1, len(images), ii+1)
+    #sub = fig.add_subplot(1, len(images), ii+1)
+    sub = fig.add_subplot(rows, len(images)/rows, ii+1)
     res = int(labels[ii]) == index
     sub.set_title(str(classes[index]) + ":" + str(res))
     plt.axis('off')
